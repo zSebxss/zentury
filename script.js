@@ -5,23 +5,38 @@ async function encriptar() {
     document.getElementById('hashResult').innerText = 'Hash: ' + hash;
 }
 
-// Función para verificar si la contraseña coincide con el hash generado
-async function verificar() {
-    const passwordVerificar = document.getElementById('passwordVerificar').value;
+// Función para desencriptar (fuerza bruta) con una wordlist
+async function desencriptar() {
+    const fileInput = document.getElementById('wordlist');
     const hashAlmacenado = document.getElementById('hashResult').innerText.split('Hash: ')[1];
 
     if (!hashAlmacenado) {
-        document.getElementById('verifyResult').innerText = 'Primero debes generar un hash.';
+        document.getElementById('decryptResult').innerText = 'Primero debes generar un hash.';
         return;
     }
 
-    const hashVerificar = await sha256(passwordVerificar);
-
-    if (hashVerificar === hashAlmacenado) {
-        document.getElementById('verifyResult').innerText = 'La contraseña es correcta.';
-    } else {
-        document.getElementById('verifyResult').innerText = 'La contraseña es incorrecta.';
+    if (!fileInput.files.length) {
+        document.getElementById('decryptResult').innerText = 'Por favor, carga una wordlist.';
+        return;
     }
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = async function(event) {
+        const lines = event.target.result.split('\n'); // Dividimos el archivo en líneas
+        for (let i = 0; i < lines.length; i++) {
+            const password = lines[i].trim(); // Quitamos los espacios en blanco
+            const hash = await sha256(password);
+            if (hash === hashAlmacenado) {
+                document.getElementById('decryptResult').innerText = '¡Contraseña encontrada!: ' + password;
+                return;
+            }
+        }
+        document.getElementById('decryptResult').innerText = 'No se encontró ninguna coincidencia en la wordlist.';
+    };
+
+    reader.readAsText(file);
 }
 
 // Función para generar el hash en SHA-256
