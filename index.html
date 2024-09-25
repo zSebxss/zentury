@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptar Contraseñas con SHA-256</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Encriptar Contraseñas con SHA-256</h1>
+
+    <h3>Generar Hash</h3>
+    <input type="password" id="password" placeholder="Ingresa la contraseña">
+    <button onclick="encriptar()">Encriptar</button>
+
+    <div class="result" id="hashResult"></div>
+
+    <h3>Verificar Contraseña</h3>
+    <input type="password" id="passwordVerificar" placeholder="Ingresa la contraseña a verificar">
+    <button onclick="verificar()">Verificar</button>
+
+    <div class="result" id="verifyResult"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
