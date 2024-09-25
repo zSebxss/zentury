@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encriptar Contraseñas con SHA-256</title>
+    <title>Encriptar y Desencriptar con Wordlist (SHA-256)</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,11 +40,11 @@
 
     <div class="result" id="hashResult"></div>
 
-    <h3>Verificar Contraseña</h3>
-    <input type="password" id="passwordVerificar" placeholder="Ingresa la contraseña a verificar">
-    <button onclick="verificar()">Verificar</button>
+    <h3>Desencriptar con Wordlist</h3>
+    <input type="file" id="wordlist" accept=".txt">
+    <button onclick="desencriptar()">Desencriptar</button>
 
-    <div class="result" id="verifyResult"></div>
+    <div class="result" id="decryptResult"></div>
 
     <script src="script.js"></script>
 </body>
